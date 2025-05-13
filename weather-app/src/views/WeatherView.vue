@@ -50,19 +50,17 @@
            </template>
 
            <template v-if="!isLoading && weatherResult.weatherInDays.list?.length">
-
-                <!-- <Chart :chart-data="chartData"></Chart> -->
+                <Chart :chart-data="chartData"></Chart>
            </template>
-
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
     import { computed, reactive, ref } from 'vue';
-    import { useWeather, type Unit } from '../use/useWeather';
+    import { useWeather, type Unit, type WeatherLatLong } from '../use/useWeather';
     import WeatherItem from '../components/WeatherItem.vue';
-    // import Chart from '../components/Chart.vue';
+    import Chart from '../components/Chart.vue';
 
     const weatherForm = reactive<{ cityName : string, unit : Unit}>({
         cityName : '',
@@ -73,7 +71,23 @@
     
     const notDataMessage = ref<string>('');
     const errorMessage = ref<string>('');
+    const chartData = computed(( )=>{
 
+        const weatherChartData : {
+            labels : (string | number)[],
+            datasets : { title : string, data : [] }[]
+        }= {
+            labels: [],
+            datasets : []
+        };
+
+        // weatherResult.weatherInDays.list?.forEach(( list : WeatherLatLong)=>{
+        //   //  weatherChartData.labels = list.weather[0].description;
+
+        // });
+
+        return weatherChartData;
+    })
 
     const {
         isLoading,

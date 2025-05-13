@@ -8,7 +8,7 @@ import type { PropType } from 'vue';
         chartData : {
             type : Object as PropType<{
                 labels : (string | number)[],
-                datasets : { title : string, data : []}
+                datasets : { title : string, data : []}[]
             }>
         },
         chartOptions : {
